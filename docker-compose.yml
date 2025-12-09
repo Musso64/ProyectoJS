@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    container_name: task-dashboard-dev
+    ports:
+      - '5173:5173'  # Common port for Vite/dev servers
+      - '3000:3000'  # Optional for other servers
+    volumes:
+      # Mount your entire project for live updates
+      - ./:/app
+      # Don't mount node_modules from host
+      - /app/node_modules
+    working_dir: /app
+    # Keep container running in interactive mode
+    stdin_open: true
+    tty: true
+    # Command to keep container alive
+    command: tail -f /dev/null

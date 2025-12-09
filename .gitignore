@@ -1,0 +1,80 @@
+# ================================
+# Dependencies
+# ================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ================================
+# Docker & Container Files
+# ================================
+# Docker ignore these in the container
+.dockerignore
+
+# Docker Compose
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Container data (never commit)
+data/
+
+# ================================
+# Tailwind & Build Output
+# ================================
+# Generated CSS files
+css/output.css
+dist/
+build/
+*.css.map
+
+# Tailwind JIT cache
+.tailwind/
+
+# ================================
+# Editor & IDE Files
+# ================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ================================
+# OS Generated Files
+# ================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ================================
+# Project Specific
+# ================================
+# Your task data (LocalStorage backup if you export)
+tasks-backup.json
+
+# Temporary files
+tmp/
+temp/
+
+# ================================
+# Optional: Development Server Logs
+# ================================
+# If you add a Node.js server later
+logs/
+*.log
