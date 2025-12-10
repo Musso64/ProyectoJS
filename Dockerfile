@@ -1,21 +1,20 @@
-# Use Node.js base image for Tailwind CLI
 FROM node:18-alpine
-
-# Set working directory
 WORKDIR /app
 
-# Copy package files for dependency installation
+# Copy package files first
 COPY package*.json ./
 COPY tailwind.config.js ./
 
-# Install dependencies (Tailwind and any others)
+# Install ALL dependencies
 RUN npm install
 
-# Copy the rest of your project files
+# Copy the rest
 COPY . .
 
-# Expose port for live server (if using)
+# Build Tailwind once initially
+RUN npx tailwindcss -i ./src/input.css -o ./src/output.css
+
 EXPOSE 3000
 
-# Default command - change based on your needs
+# Use the dev script from package.json
 CMD ["npm", "run", "dev"]
