@@ -47,8 +47,6 @@ function handleDelete(taskID, taskElement) {
         tasks = tasks.filter(task => task.id !== taskID);
         saveTasks();
         taskElement.remove();
-        showNotification('Task deleted', 'warning');
-        
     }, 350);
 }
 
@@ -153,15 +151,16 @@ function modalEditTasks (taskID){
     modal.classList.add("flex");
     overlay.classList.add("flex");
     document.querySelector(".modal-container").classList.add("flex");
-
-    for (let i=0; i < tasks.length ; i++){
-        if (tasks[i].id === editingTaskId){
-            editTaskName.value = tasks[i].name;
-            editTaskDescription.value = tasks[i].description;
-            editTaskStatus.value = tasks[i].status;
-            break;
-        }
+    const taskFind = tasks.find(task => task.id === editingTaskId);
+    if (!taskFind) {
+        alert('Task not found! Idiot!');
+        return;
     }
+        if (taskFind.id === editingTaskId){
+            editTaskName.value = taskFind.name;
+            editTaskDescription.value = taskFind.description;
+            editTaskStatus.value = taskFind.status;
+        }
 
 }
 
@@ -179,17 +178,19 @@ function saveEditedTasks (taskID) {
     const editTaskDescription = document.getElementById("editTaskDescription");
     const editTaskStatus = document.getElementById("editTaskStatus");
     try {
-        for (let i=0; i < tasks.length ; i++){
-            if (tasks[i].id === taskID){
-                tasks[i].name = editTaskName.value;
-                tasks[i].description = editTaskDescription.value;
-                tasks[i].status = editTaskStatus.value;
-                if (tasks[i].status === "finished" && !tasks[i].completedAt){
-                    tasks[i].completedAt = Date.now();
-                }
-                break;
-            }
+        const taskFind = tasks.find(task => task.id === taskID);
+        if (!taskFind) {
+            alert('Task not found! Idiot!');
+            return;
         }
+            if (taskFind.id === taskID){
+                taskFind.name = editTaskName.value;
+                taskFind.description = editTaskDescription.value;
+                taskFind.status = editTaskStatus.value;
+                if (taskFind.status === "finished" && !taskFind.completedAt){
+                    taskFind.completedAt = Date.now();
+                }
+            }
         saveTasks();
         renderTasks();
         modalClose();
@@ -208,8 +209,9 @@ formTasks.addEventListener("submit", function(event) {
 
 document.addEventListener("DOMContentLoaded",function (){
     loadTasks();
+});
 
-    taskDashboard.addEventListener("click", function (event){
+taskDashboard.addEventListener("click", function (event){
 
     if(event.target.classList.contains('deleteTasks')){
         const taskElement = event.target.closest('li');
@@ -228,6 +230,8 @@ document.addEventListener("DOMContentLoaded",function (){
             modalEditTasks(taskId);
         }
     }
+    });
+
     modalContainer.addEventListener("click", function (event){
         if(event.target.classList.contains('closeModal')) {
             modalClose();
@@ -236,5 +240,3 @@ document.addEventListener("DOMContentLoaded",function (){
             saveEditedTasks(editingTaskId);
         }
     })
-})
-});
