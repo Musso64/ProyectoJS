@@ -8,7 +8,7 @@ const formTasks = document.querySelector("form");
 const taskDashboard = document.getElementById("taskDashboard");
 
 let tasks = [];
-
+let x;
 class Task {
     id=crypto.randomUUID();
     name;
