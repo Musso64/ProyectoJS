@@ -610,10 +610,6 @@ video {
   width: 100%;
 }
 
-.list-disc {
-  list-style-type: disc;
-}
-
 .flex-row {
   flex-direction: row;
 }
@@ -745,5 +741,5 @@ video {
 }
 
 .text-font{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
